@@ -125,6 +125,24 @@ model:
   activations_checkpoint_layers_per_pipeline: null
   sequence_parallel: false
 
+  #chakra profiling options
+  chakra_profile:
+    enabled: False
+    start_step: 2  # Global batch to start profiling
+    end_step: 2 # Global batch to end profiling
+    warmup_steps: 0
+    active_steps: 1
+    trace_dir: ${training.run.results_dir}
+
+  # Nsys profiling options
+  nsys_profile:
+    enabled: False
+    trace: [nvtx,cuda]
+    start_step: 10  # Global batch to start profiling
+    end_step: 10 # Global batch to end profiling
+    ranks: [0,1,2,3,4,5,6,7] # Global rank IDs to profile
+    gen_shape: False # Generate model and kernel details including input shapes
+
   ## Transformer Engine
   transformer_engine: true
   fp8: False # enables fp8 in TransformerLayer forward
@@ -168,64 +186,5 @@ model:
     eod_mask_loss: false
     index_mapping_dir: null
     data_prefix:
-    - .0333
-    - ${data_dir}/my-llama_00_text_document
-    - .0333
-    - ${data_dir}/my-llama_01_text_document
-    - .0333
-    - ${data_dir}/my-llama_02_text_document
-    - .0333
-    - ${data_dir}/my-llama_03_text_document
-    - .0333
-    - ${data_dir}/my-llama_04_text_document
-    - .0333
-    - ${data_dir}/my-llama_05_text_document
-    - .0333
-    - ${data_dir}/my-llama_06_text_document
-    - .0333
-    - ${data_dir}/my-llama_07_text_document
-    - .0333
-    - ${data_dir}/my-llama_08_text_document
-    - .0333
-    - ${data_dir}/my-llama_09_text_document
-    - .0333
-    - ${data_dir}/my-llama_10_text_document
-    - .0333
-    - ${data_dir}/my-llama_11_text_document
-    - .0333
-    - ${data_dir}/my-llama_12_text_document
-    - .0333
-    - ${data_dir}/my-llama_13_text_document
-    - .0333
-    - ${data_dir}/my-llama_14_text_document
-    - .0333
-    - ${data_dir}/my-llama_15_text_document
-    - .0333
-    - ${data_dir}/my-llama_16_text_document
-    - .0333
-    - ${data_dir}/my-llama_17_text_document
-    - .0333
-    - ${data_dir}/my-llama_18_text_document
-    - .0333
-    - ${data_dir}/my-llama_19_text_document
-    - .0333
-    - ${data_dir}/my-llama_20_text_document
-    - .0333
-    - ${data_dir}/my-llama_21_text_document
-    - .0333
-    - ${data_dir}/my-llama_22_text_document
-    - .0333
-    - ${data_dir}/my-llama_23_text_document
-    - .0333
-    - ${data_dir}/my-llama_24_text_document
-    - .0333
-    - ${data_dir}/my-llama_25_text_document
-    - .0333
-    - ${data_dir}/my-llama_26_text_document
-    - .0333
-    - ${data_dir}/my-llama_27_text_document
-    - .0333
-    - ${data_dir}/my-llama_28_text_document
-    - .0334
-    - ${data_dir}/my-llama_29_text_document
-
+    - 1.0
+    - ${data_dir}/llama/BigScience_shuf.llama2_text_document

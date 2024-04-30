@@ -160,7 +160,7 @@ model:
     trace: [nvtx,cuda]
     start_step: 10  # Global batch to start profiling
     end_step: 10 # Global batch to end profiling
-    ranks: [0] # Global rank IDs to profile
+    ranks: [0,1,2,3,4,5,6,7] # Global rank IDs to profile
     gen_shape: False # Generate model and kernel details including input shapes
 
   optim:
